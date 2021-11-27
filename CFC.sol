@@ -207,6 +207,7 @@ contract CFC is ICFC {
     //App write functions=========================================================================================================================
     //Used by the CF Bridge genesis contract to burn CFC being payed as txn fees and any CFC being transfered
     function burn(address user, uint256 amount) external app override {
+        require(_balances[user] >= amount, "CFC: Insufficient Balance");
         _balances[user] -= amount;
         _totalSupply -= amount;
 
